@@ -36,9 +36,10 @@ public class SolitaireBoard {
    /**
       Representation invariant:
 
-     * Sum of the integers in solitaireArr should total to  CARD_TOTAL
+     * Sum of the integers in solitaireArr should total to CARD_TOTAL
      * solitaireArr should not contain any negative integers
-     * all entries in teh array should be integers
+     * All entries in the array should be integers
+     * number of piles (with non zero & non negative values) should be equal to NUM_FINAL_PILES
 
    */
    
@@ -63,7 +64,7 @@ public class SolitaireBoard {
       try{
     	  assert isValidSolitaireBoard();
     	  }catch(AssertionError e) {
-    		  throw new AssertionError("ERROR: Each pile must have at least one card and the total number of cards must be 45");
+    		  throw new AssertionError("ERROR: Each pile must have at least one card and the total number of cards must be:"+ CARD_TOTAL);
     	  
       }
    }
@@ -113,7 +114,10 @@ public class SolitaireBoard {
 	   pushZerosToEnd();
 
    }
-    void pushZerosToEnd() 
+    /**
+    * pushes zeros to end of the solitaire array
+    */
+    private void pushZerosToEnd() 
    { 
        int count = 0;
        int numOfNonZeroVal = 0;// Count of non-zero elements 
@@ -140,7 +144,7 @@ public class SolitaireBoard {
 
    
    /**
-      Returns true iff the current board is at the end of the game.  That is, there are NUM_FINAL_PILES
+      Returns true if the current board is at the end of the game.  That is, there are NUM_FINAL_PILES
       piles that are of sizes 1, 2, 3, . . . , NUM_FINAL_PILES, in any order.
    */
    
@@ -176,25 +180,25 @@ public class SolitaireBoard {
      		  System.out.print(solitaireArr[i]+" "); 
      	  }
        }
-      return solitaireArr.toString();   // dummy code to get stub to compile
+      return solitaireArr.toString();  
    }
    
    
    /**
-      Returns true iff the solitaire board data is in a valid state
+      Returns true if the solitaire board data is in a valid state
       (See representation invariant comment for more details.)
    */
    private boolean isValidSolitaireBoard() {
 	   boolean isValidSolitaireBoard = true;
-	   if(solitaireArr.length != 45 ) {
+	   if(solitaireArr.length != CARD_TOTAL ) {
 		   isValidSolitaireBoard = false;
 	   }
 	   int sum =0;
 	   for (int num : solitaireArr) {
-		   if(num<0 || num > 45) isValidSolitaireBoard = false;
+		   if(num<0 || num > CARD_TOTAL) isValidSolitaireBoard = false;
 		   sum += num;
 		}
-	   if (sum !=45) {
+	   if (sum !=CARD_TOTAL) {
 		   isValidSolitaireBoard = false; 
 	   }
       return isValidSolitaireBoard;
